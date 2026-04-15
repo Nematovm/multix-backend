@@ -1,0 +1,87 @@
+{
+  "id": 5,
+  "title": "Part 5",
+  "duration": 30,
+  "parts": [
+    {
+      "part_number": 5,
+      "title": "Part 5",
+      "instruction": "Read the following text and answer questions 30–35.",
+      "type": "reading-mixed",
+      "passage_title": "The Benefits of Urban Green Spaces",
+      "passage_subtitle": "",
+      "passage_text": "Urban green spaces, such as parks, gardens, and green rooftops, provide numerous benefits to city dwellers. These areas, often incorporated into city planning, serve as vital components of urban environments.\n\nTheir advantages extend beyond mere aesthetics, impacting health, social interaction, and the environment. One significant benefit of urban green spaces is their positive effect on mental health. Studies have shown that access to green areas can reduce stress, anxiety, and depression among city residents. Natural environments offer a respite from the fast-paced urban lifestyle, allowing individuals to relax and rejuvenate.\n\nIn addition to mental health benefits, green spaces play a crucial role in promoting physical activity. Parks and recreational areas provide opportunities for exercise, such as walking, jogging, and sports, contributing to overall physical well-being. The availability of these spaces encourages a more active lifestyle, which is essential for preventing obesity and related health issues.\n\nUrban green spaces also contribute to environmental sustainability. They help improve air quality by absorbing pollutants and producing oxygen. Trees and plants in these areas can mitigate the urban heat island effect, where cities become significantly warmer than their rural surroundings. This cooling effect is particularly important in combating the impacts of climate change.\n\nMoreover, green spaces foster social interaction and community engagement. They serve as gathering spots for people of all ages, promoting social cohesion and a sense of belonging. Community events, such as festivals and farmers' markets, often take place in these areas, strengthening neighborhood bonds.",
+      "question_groups": [
+        {
+          "type": "fitb",
+          "title": "Questions 30–33",
+          "instruction": "Fill in the missing information. Write NO MORE THAN ONE WORD and/or A NUMBER for each answer.",
+          "summary_passage": "One significant benefit of urban green spaces is their positive effect on {q30} health, including reduced stress and anxiety. Green spaces provide opportunities for physical {q31}, such as walking and jogging, which contribute to physical well-being. Urban green spaces help improve air quality by absorbing {q32} and producing oxygen. These areas foster {q33} interaction and community engagement through social gatherings and events.",
+          "questions": [
+            {
+              "id": "q30",
+              "number": 30,
+              "correctAnswer": "mental"
+            },
+            {
+              "id": "q31",
+              "number": 31,
+              "correctAnswer": "activity"
+            },
+            {
+              "id": "q32",
+              "number": 32,
+              "correctAnswer": "pollutants"
+            },
+            {
+              "id": "q33",
+              "number": 33,
+              "correctAnswer": "social"
+            }
+          ]
+        },
+        {
+          "type": "mcq",
+          "title": "Questions 34–35",
+          "instruction": "Choose the correct answer A, B, C, or D.",
+          "questions": [
+            {
+              "id": "q34",
+              "number": 34,
+              "text": "How do urban green spaces contribute to physical health?",
+              "options": [
+                { "key": "A", "text": "By providing spaces for indoor activities." },
+                { "key": "B", "text": "By offering opportunities for outdoor exercise." },
+                { "key": "C", "text": "By increasing pollution levels." },
+                { "key": "D", "text": "By reducing social interaction." }
+              ]
+            },
+            {
+              "id": "q35",
+              "number": 35,
+              "text": "What is one environmental benefit of urban green spaces?",
+              "options": [
+                { "key": "A", "text": "They increase the urban heat island effect." },
+                { "key": "B", "text": "They help to cool the surrounding areas." },
+                { "key": "C", "text": "They contribute to noise pollution." },
+                { "key": "D", "text": "They reduce the amount of oxygen in the atmosphere." }
+              ]
+            }
+          ]
+        }
+      ],
+      "answers": {
+        "q34": "B",
+        "q35": "B"
+      },
+      "explanations": {
+        "q30": "'mental' health — passage aniq aytadi: 'positive effect on mental health'.",
+        "q31": "'activity' — 'promoting physical activity' deb yozilgan.",
+        "q32": "'pollutants' — 'absorbing pollutants and producing oxygen'.",
+        "q33": "'social' — 'foster social interaction and community engagement'.",
+        "q34": "B — 'Parks provide opportunities for exercise such as walking, jogging, and sports'.",
+        "q35": "B — 'This cooling effect is particularly important...' green spaces cool surrounding areas."
+      }
+    }
+  ]
+}

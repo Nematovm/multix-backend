@@ -1,0 +1,55 @@
+{
+  "id": 2,
+  "title": "Reading Test",
+  "duration": 20,
+  "parts": [
+    {
+      "part_number": 2,
+      "title": "Part 2",
+      "instruction": "Read the texts (7-14) and the statements A-J. Decide which text matches with the situation described in the statements. Each statement can be used ONCE only. There are TWO extra statements which you do not need to use.",
+      "type": "matching",
+      "options": [
+        { "key": "A", "text": "Koekohe. A sandy beach with lots of space and views out to Fish port Harbour. Surfing is not permitted but swimming is safe and there is a children's play area and a small shop. The nearest car park is two kilometres away. There are many pleasant walks along the coastal path." },
+        { "key": "B", "text": "Isla Robeson. The National Sea Life Centre in Birmingham is the only aquarium in the UK where you can see a hammerhead shark along with Sea Dragons from Australia and baby stingrays from the Amazon." },
+        { "key": "C", "text": "Yonaha Maehama. At Think Tank you will find four floors of hands-on exhibits and historical collections showing you the science of the world from the past, the present and the future. From galleries and exhibitions to an exciting programme of events including steam engines and space." },
+        { "key": "D", "text": "Puntadel'Este. A large beach which attracts quite a few visitors but doesn't get crowded because of its size. There are pleasant views out to sea. Swimming is safe but surfing is not permitted. There is a café and parking but no shops." },
+        { "key": "E", "text": "Stratford Butterfly Farm. The biggest butterfly farm in Europe. Walk around a tropical rainforest as butterflies fly freely around you. See them in the Caterpillar Room. Don't miss Insect City with huge spiders and scorpions!" },
+        { "key": "F", "text": "Champagne. A very sheltered beach great for sun bathing. It is a popular surfing and sailing beach but swimming is dangerous. There is a café and a children's play area but no car park — visitors walk ten minutes across fields." },
+        { "key": "G", "text": "Warwick Castle. Britain's greatest Medieval Castle. Visit exhibitions, climb the castle towers, walk the gardens designed in 1753 by Capability Brown. Experience the Kingmaker exhibition or witness a Victorian Royal Weekend." },
+        { "key": "H", "text": "Halcombe. A small beach within easy reach of the town centre and its many shops. Very popular so not much space. Next to the Milgrove Golf Club, open to the public with a restaurant. No children's play area, no surfing." },
+        { "key": "I", "text": "Marple. Although unsuitable for surfing, this is a popular boating centre. Swimming is good and the many pools of shallow water are safe for children. Ocean Water Sports Centre offers lessons in sailing and water skiing. There is a steep path to the beach from the car park." },
+        { "key": "J", "text": "Black Country Museum. Britain's finest open-air museum. Discover an old-fashioned village by the canal. Look around original shops and houses, see what it's like down a mine and take a ride on a tramcar." }
+      ],
+      "questions": [
+        { "id": "q7",  "number": 7,  "text": "You and your wife have two children who cannot swim. Your wife wants them to be able to play safely in the water. You want to learn to sail. You need to park near the beach." },
+        { "id": "q8",  "number": 8,  "text": "You study physics and are interested in anything to do with science. You'd like to visit somewhere to see some examples of early mechanical engines." },
+        { "id": "q9",  "number": 9,  "text": "You and your wife want to spend the day on the beach and have lunch in a café. You want to go surfing, while your wife wants to relax in the sun." },
+        { "id": "q10", "number": 10, "text": "Your eldest daughter is learning about English history and would like to go somewhere to bring this subject to life. You are really interested in flowers." },
+        { "id": "q11", "number": 11, "text": "You and Claudia want to relax on the beach. You would also like to do some sport, while Claudia would like to buy some presents to take home." },
+        { "id": "q12", "number": 12, "text": "Sarah and her husband would like to spend the day outdoors. They don't like going on rides but are both interested in history and how people used to live." },
+        { "id": "q13", "number": 13, "text": "Richard, Fiona and their seven-year-old daughter want to swim and go for a walk. They would also like somewhere that has a children's play area, and they plan to buy souvenirs." },
+        { "id": "q14", "number": 14, "text": "You and your wife want somewhere with lots of space where you can sit and enjoy the view. Your wife would not manage a difficult walk to the beach. You want to eat lunch in a café." }
+      ],
+      "answers": {
+        "q7":  "I",
+        "q8":  "C",
+        "q9":  "F",
+        "q10": "G",
+        "q11": "H",
+        "q12": "J",
+        "q13": "A",
+        "q14": "D"
+      },
+      "explanations": {
+        "q7":  "Marple has shallow water safe for children, sailing lessons, and a car park.",
+        "q8":  "Think Tank has science exhibits including steam engines.",
+        "q9":  "Champagne allows surfing and has a café, but swimming is dangerous — wife sunbathes.",
+        "q10": "Warwick Castle covers English history; gardens with flowers by Capability Brown.",
+        "q11": "Halcombe has a golf club for sport and is near town shops for souvenirs.",
+        "q12": "Black Country Museum is outdoors, historical, no rides.",
+        "q13": "Koekohe has swimming, coastal walks, a children's play area, and a small shop.",
+        "q14": "Puntadel'Este is large, has sea views, easy access, and a café."
+      }
+    }
+  ]
+}

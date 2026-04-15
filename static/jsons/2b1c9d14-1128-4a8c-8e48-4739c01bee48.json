@@ -1,0 +1,130 @@
+{
+  "id": 4,
+  "title": "Part 4",
+  "duration": 20,
+  "parts": [
+    {
+      "part_number": 4,
+      "title": "Part 4",
+      "instruction": "Read the following text and answer questions 21–29.",
+      "type": "reading-mcq",
+      "passage_title": "Ancient Storytelling",
+      "passage_subtitle": "",
+      "passage_text": "It was told, we suppose, to people crouched around a fire: a tale of adventure, most likely relating some close encounter with death; a remarkable hunt, an escape from mortal danger; a vision, or something else out of the ordinary. Whatever its thread, the weaving of this story was done with a prime purpose. The listeners must be kept listening. They must not fall asleep. So, as the story went on, its audience should be sustained by one question above all. What happens next?\n\nThe first fireside stories in human history can never be known. They were kept in the heads of those who told them. This method of storage is not necessarily inefficient. From documented oral traditions in Australia, the Balkans and other parts of the world we know that specialized storytellers and poets can recite from memory literally thousands of lines, in verse or prose, verbatim—word for word. But while memory is rightly considered an art in itself, it is clear that a primary purpose of making symbols is to have a system of reminders or mnemonic cues – signs that assist us to recall certain information in the mind's eye. In some Polynesian communities, a notched memory stick may help to guide a storyteller through successive stages of recitation. But in other parts of the world, the activity of storytelling historically resulted in the development or even the invention of writing systems.\n\nOne theory about the arrival of literacy in ancient Greece, for example, argues that the epic tales about the Trojan War and the wanderings of Odysseus – traditionally attributed to Homer – were just so enchanting to hear that they had to be preserved. So the Greeks, c.750-700BC, borrowed an alphabet from their neighbors in the eastern Mediterranean, the Phoenicians.\n\nThe custom of recording stories on parchment and other materials can be traced in many manifestations around the world, from the priestly papyrus archives of ancient Egypt to the birch-bark scrolls on which the North American Ojibway Indians set down their creation myth. It is a well-tried and universal practice: so much so that to this day storytime is probably most often associated with words on paper. The formal practice of narrating a story aloud would seem—so we assume—to have given way to newspapers, novels and comic strips. This, however, is not the case. Statistically, it is doubtful that the majority of humans currently rely upon the written word to get access to stories. So what is the alternative source?\n\nEach year, over 7 billion people will go to watch the latest offering from Hollywood, Bollywood and beyond. The supreme storyteller of today is cinema. The movies, as distinct from still photography, seem to be an essential modern phenomenon. This is an illusion, for there are certain ways in which the medium of film is indebted to very old precedents of arranging sequences of images. But any account of visual storytelling must begin with the recognition that all storytelling beats with a deeply atavistic pulse: that is, a 'good story' relies upon formal patterns of plot and characterisation that have been embedded in the practice of storytelling over many generations.\n\nThousands of scripts arrive every week at the offices of the major film studios. But aspiring screenwriters really need to look no further for essential advice than the fourth-century BC Greek philosopher Aristotle. He left some incomplete lecture notes on the art of telling stories in various literary and dramatic modes, a slim volume known as The Poetics. Though he can never have envisaged the popcorn-fuelled actuality of a multiplex cinema, Aristotle is almost prescient about the key elements required to get the crowds flocking to such a cultural hub. He analyzed the process with cool rationalism. When a story enchants us, we lose the sense of where we are; we are drawn into the story so thoroughly that we forget it is a story being told. This is, in Aristotle's phrase, 'the suspension of disbelief.'",
+      "question_groups": [
+        {
+          "title": "Questions 21–24",
+          "instruction": "Choose the correct answer A, B, C, or D.",
+          "questions": [
+            {
+              "id": "q21",
+              "number": 21,
+              "type": "mcq",
+              "text": "What was the main goal of the earliest fireside stories?",
+              "options": [
+                { "key": "A", "text": "To entertain with humor" },
+                { "key": "B", "text": "To keep the audience attentive and awake" },
+                { "key": "C", "text": "To impart moral lessons" },
+                { "key": "D", "text": "To record historical events" }
+              ]
+            },
+            {
+              "id": "q22",
+              "number": 22,
+              "type": "mcq",
+              "text": "What does the passage imply about the first storytellers?",
+              "options": [
+                { "key": "A", "text": "They heavily relied on written texts." },
+                { "key": "B", "text": "They used memory techniques to retain stories." },
+                { "key": "C", "text": "They recorded tales on parchment." },
+                { "key": "D", "text": "They avoided using symbols or cues." }
+              ]
+            },
+            {
+              "id": "q23",
+              "number": 23,
+              "type": "mcq",
+              "text": "Why did the ancient Greeks reportedly adopt an alphabet from the Phoenicians?",
+              "options": [
+                { "key": "A", "text": "To document agricultural practices" },
+                { "key": "B", "text": "To preserve epic tales like those of the Trojan War" },
+                { "key": "C", "text": "To improve trade and communication" },
+                { "key": "D", "text": "To create a legal system" }
+              ]
+            },
+            {
+              "id": "q24",
+              "number": 24,
+              "type": "mcq",
+              "text": "According to the passage, what serves as the modern equivalent of ancient storytelling?",
+              "options": [
+                { "key": "A", "text": "Newspapers and novels" },
+                { "key": "B", "text": "Radio broadcasts" },
+                { "key": "C", "text": "Cinema" },
+                { "key": "D", "text": "Social media platforms" }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Questions 25–29",
+          "instruction": "Decide if the following statements agree with the information given in the text. Choose True, False, or Not Given.",
+          "questions": [
+            {
+              "id": "q25",
+              "number": 25,
+              "type": "tfng",
+              "text": "The earliest fireside stories primarily focused on the afterlife."
+            },
+            {
+              "id": "q26",
+              "number": 26,
+              "type": "tfng",
+              "text": "In some cultures, storytellers used notched sticks to help them remember the sequence of events."
+            },
+            {
+              "id": "q27",
+              "number": 27,
+              "type": "tfng",
+              "text": "The ancient Greeks developed their alphabet independently, without outside influence."
+            },
+            {
+              "id": "q28",
+              "number": 28,
+              "type": "tfng",
+              "text": "The Ojibway Indians recorded their creation myths on birch-bark scrolls."
+            },
+            {
+              "id": "q29",
+              "number": 29,
+              "type": "tfng",
+              "text": "Aristotle's 'The Poetics' offers insights that are still relevant for modern screenwriters."
+            }
+          ]
+        }
+      ],
+      "answers": {
+        "q21": "B",
+        "q22": "B",
+        "q23": "B",
+        "q24": "C",
+        "q25": "False",
+        "q26": "True",
+        "q27": "False",
+        "q28": "True",
+        "q29": "True"
+      },
+      "explanations": {
+        "q21": "Passage birinchi paragrafda asosiy maqsad tinglovchilarni uxlatmaslik ekanligini aytadi.",
+        "q22": "Storytellers minglab satrlarni yod olgan — memory techniques ishlatishgan.",
+        "q23": "Greeks Trojans haqidagi epik dostonlarni saqlab qolish uchun Phoenicians alfabetini olishgan.",
+        "q24": "Passage 'The supreme storyteller of today is cinema' deb aniq aytadi.",
+        "q25": "Passage afterlife haqida hech narsa aytmaydi — False.",
+        "q26": "Polynesian communities da notched memory stick ishlatilgani aytilgan — True.",
+        "q27": "Greeks Phoenicians dan alphabet olgan — False.",
+        "q28": "Ojibway Indians birch-bark scrolls ga creation myth yozgan — True.",
+        "q29": "Aristotle's Poetics hozirgi screenwriters uchun ham relevant ekani aytilgan — True."
+      }
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "id": 1,
+  "title": "Part 1",
+  "duration": 20,
+  "parts": [
+    {
+      "part_number": 1,
+      "title": "Part 1",
+      "instruction": "Read the texts. Fill in each gap with ONE word. You must use a word which is somewhere in the rest of the text (1-6).",
+      "type": "fitb",
+      "passage": [
+        { "type": "text", "content": "Last Sunday, my family and I went to the city zoo. It was a sunny day, perfect for a visit. The " },
+        { "type": "input", "id": "q1", "number": 1 },
+        { "type": "text", "content": " was bustling with people, all excited to see the animals. We started our tour near the lion enclosure. The lions were magnificent, their powerful bodies lounging in the sun. One even yawned, showing off impressive teeth! It was amazing to see " },
+        { "type": "input", "id": "q2", "number": 2 },
+        { "type": "text", "content": " up close. Next, we visited the monkeys. They were incredibly playful and energetic, swinging from branch to branch. One cheeky monkey even snatched a banana from a nearby visitor! It was hilarious to watch. The monkey " },
+        { "type": "input", "id": "q3", "number": 3 },
+        { "type": "text", "content": " also had a small waterfall, which the monkeys seemed to love playing in. After that we headed to the aquarium. There were so many different kinds of fishes swimming around - bright orange ones, long silvery ones, and even some with strange patterns. We spent a good amount of time watching the " },
+        { "type": "input", "id": "q4", "number": 4 },
+        { "type": "text", "content": " darting about. My little sister especially loved a large turtle slowly making its way across the bottom of the tank. The zoo was a fantastic day out. We saw so many fascinating " },
+        { "type": "input", "id": "q5", "number": 5 },
+        { "type": "text", "content": " and had a wonderful " },
+        { "type": "input", "id": "q6", "number": 6 },
+        { "type": "text", "content": " together as a family. I learned so much about different animals and their habitats, and I'd definitely recommend a visit to the zoo to anyone!" }
+      ],
+      "answers": {
+        "q1": "zoo",
+        "q2": "them",
+        "q3": "enclosure",
+        "q4": "fish",
+        "q5": "animals",
+        "q6": "time"
+      },
+      "explanations": {
+        "q1": "The word 'zoo' is used later in the passage.",
+        "q2": "'Them' refers to the lions mentioned just before.",
+        "q3": "'Enclosure' is mentioned in reference to the lions' area.",
+        "q4": "'Fish' refers to the creatures in the aquarium.",
+        "q5": "'Animals' is the main theme throughout the passage.",
+        "q6": "'Time' collocates with 'wonderful' naturally."
+      }
+    }
+  ]
+}

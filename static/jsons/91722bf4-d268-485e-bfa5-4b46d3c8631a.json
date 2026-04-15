@@ -1,0 +1,79 @@
+{
+  "id": 3,
+  "title": "Part 3",
+  "duration": 20,
+  "parts": [
+    {
+      "part_number": 3,
+      "title": "Part 3",
+      "instruction": "Read the text and choose the correct heading for each paragraph from the list of headings below. There are more headings than paragraphs, so you will not use all of them. You cannot use any heading more than once.",
+      "type": "heading-match",
+      "passage_title": "Pedestrians only",
+      "passage_subtitle": "How traffic-free shopping streets developed",
+      "headings": [
+       { "key": "A", "text": "Facing local opposition" },
+       { "key": "B", "text": "Some reasons for success" },
+       { "key": "C", "text": "Winners and losers" },
+       { "key": "D", "text": "A need for change" },
+       { "key": "E", "text": "An experiment that went wrong" },
+       { "key": "F", "text": "An idea from ancient history" },
+       { "key": "G", "text": "North America learns from Europe" },
+       { "key": "H", "text": "Environmental Benefits of Car-Free Zones" }
+      ],
+  "paragraphs": [
+    {
+      "id": "q15",
+      "number": 15,
+      "label": "Paragraph I",
+      "text": "The concept of traffic-free shopping areas goes back a long time. During the Middle Ages, traffic-free shopping areas known as souks were built in Middle Eastern countries to allow people to shop in comfort and, more importantly, safety. As far back as 2,000 years ago, road traffic was banned from central Rome during the day to allow for the free movement of pedestrians, and was only allowed in at night when shops and markets had closed for the day. In most other cities, however, pedestrians were forced to share the streets with horses, coaches and, later, with cars and other motorized vehicles."
+    },
+    {
+      "id": "q16",
+      "number": 16,
+      "label": "Paragraph II",
+      "text": "The modern, traffic-free shopping street was born in Europe in the 1960s, when both city populations and car ownership increased rapidly. Dirty exhaust fumes from cars and the risks involved in crossing the road were beginning to make shopping an unpleasant and dangerous experience. Many believed the time was right for experimenting with car-free streets, and shopping areas seemed the best place to start."
+    },
+    {
+      "id": "q17",
+      "number": 17,
+      "label": "Paragraph III",
+      "text": "At first, there was resistance from shopkeepers. They believed that such a move would be bad for business. They argued that people would avoid streets if they were unable to get to them in their cars. When the first streets in Europe were closed to traffic, there were even noisy demonstrations, as many shopkeepers predicted they would lose customers."
+    },
+    {
+      "id": "q18",
+      "number": 18,
+      "label": "Paragraph IV",
+      "text": "However, research carried out afterwards in several European cities revealed some unexpected statistics. In Munich, Cologne and Hamburg, visitors to shopping areas increased by 50 per cent. On Copenhagen's main shopping street, shopkeepers reported sales increases of 25-40 per cent. Shopkeepers in Minneapolis, USA, were so impressed when they learnt this that they even offered to pay for the construction and maintenance costs of their own traffic-free streets."
+    },
+    {
+      "id": "q19",
+      "number": 19,
+      "label": "Paragraph V",
+      "text": "With the arrival of the traffic-free shopping street, many shops, especially those selling things like clothes, food and smaller luxury items, prospered. Unfortunately, it wasn't good news for everyone, as shops selling furniture and larger electrical appliances actually saw their sales drop. Many of these were forced to move elsewhere, away from the city centre. Today they are a common feature on the outskirts of towns and cities, often situated in out-of-town retail zones with their own car parks and other local facilities."
+    },
+    {
+      "id": "q20",
+      "number": 20,
+      "label": "Paragraph VI",
+      "text": "As more cities adopt traffic-free shopping zones, the environmental impact has become increasingly noticeable. Studies show that these areas experience significantly lower levels of air pollution due to the reduction in vehicle emissions. Additionally, noise levels in these zones drop dramatically, creating a more pleasant environment for pedestrians. Cities like Amsterdam and Oslo have reported cleaner air, reduced greenhouse gas emissions, and improved public health in areas where car-free zones have been implemented."
+    }
+  ],
+  "answers": {
+    "q15": "F",
+    "q16": "D",
+    "q17": "A",
+    "q18": "G",
+    "q19": "C",
+    "q20": "H"
+  },
+  "explanations": {
+    "q15": "Paragraph I ancient history haqida — souks va Rome misollarini keltiradi.",
+    "q16": "Paragraph II muammo tug'ilishi va o'zgarish zaruratini tasvirlaydi.",
+    "q17": "Paragraph III do'kondorlarning qarshilik va noroziligini tasvirlaydi.",
+    "q18": "Paragraph IV Evropa tajribasidan ta'sirlangan Minneapolis (Shimoliy Amerika) misolini keltiradi.",
+    "q19": "Paragraph V ba'zi do'konlar yutgan, ba'zilari yutqazganini tasvirlaydi.",
+    "q20": "Paragraph VI atrof-muhitga ijobiy ta'sirni ko'rsatadi."
+  }
+    }
+  ]
+}

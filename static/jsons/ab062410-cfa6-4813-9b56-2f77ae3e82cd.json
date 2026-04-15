@@ -1,0 +1,360 @@
+{
+  "id": 2,
+  "title": "Full Mock",
+  "is_full_mock": true,
+  "duration": 60,
+  "parts": [
+    {
+      "part_number": 1,
+      "title": "Part 1",
+      "instruction": "Read the text. Fill in each gap with ONE word. You must use a word which is somewhere in the rest of the text.",
+      "type": "fitb",
+      "passage": [
+        { "type": "text", "content": "Sport Games\n\nAll people play football, and Americans play football; but surprisingly they do not play the same game. American " },
+        { "type": "input", "id": "q1", "number": 1, "correctAnswer": "football" },
+        { "type": "text", "content": " is played by men (and occasionally women) wearing helmets and protective clothing; the ball is oval. European football is played with a round " },
+        { "type": "input", "id": "q2", "number": 2, "correctAnswer": "ball" },
+        { "type": "text", "content": " by people wearing just socks, shorts, a shirt, and football boots.\n\nWe Americans have another popular outdoor game too; baseball - a classic American " },
+        { "type": "input", "id": "q3", "number": 3, "correctAnswer": "game" },
+        { "type": "text", "content": " that is only played seriously in North America. In Britain, a few people play an \"ancestor\" of baseball, called \"rounders\" - but it is not a popular sport. In today's \"global village\", lifestyles have become international. Often the American model has spread to other countries of the world. American sports, however, have not " },
+        { "type": "input", "id": "q4", "number": 4, "correctAnswer": "spread" },
+        { "type": "text", "content": " all over the world, as American films and American fashions have. On the contrary, European sports have been more successful internationally. Indeed, " },
+        { "type": "input", "id": "q5", "number": 5, "correctAnswer": "European" },
+        { "type": "text", "content": " football is slowly developing in the USA (where we call it \"soccer\"). Although it is not as big in Europe as in the " },
+        { "type": "input", "id": "q6", "number": 6, "correctAnswer": "USA" },
+        { "type": "text", "content": " basketball has become much more popular in other countries than any other American team sport." }
+      ],
+      "answers": {
+        "q1": "football",
+        "q2": "ball",
+        "q3": "game",
+        "q4": "spread",
+        "q5": "European",
+        "q6": "USA"
+      }
+    },
+    {
+      "part_number": 2,
+      "title": "Part 2",
+      "instruction": "Read the texts 7-14 and the statements A-J. Decide which situation described in the statements matches with texts. Each statement can be used ONCE only. There are TWO extra statements which you do not need to use.",
+      "type": "matching",
+      "options": [
+        { "key": "A", "text": "You are the boss and you want to invite your colleagues for a meal." },
+        { "key": "B", "text": "You want to take your mother out to an outdoor restaurant on her special day." },
+        { "key": "C", "text": "You are looking for a restaurant where retired people have a discount on Sundays." },
+        { "key": "D", "text": "You are looking for a place with a very large selection on the menu." },
+        { "key": "E", "text": "You are looking for a daily discount for senior citizens in the afternoon." },
+        { "key": "F", "text": "You would like to take your friends to a Karaoke restaurant from 9 p.m." },
+        { "key": "G", "text": "You are looking for a non-stop restaurant on a week-day." },
+        { "key": "H", "text": "You are looking for special catering on a Saturday." },
+        { "key": "I", "text": "You need a restaurant where your 4-year-old son can have free food." },
+        { "key": "J", "text": "You are looking for a restaurant with home-made specialities." }
+      ],
+      "questions": [
+        { "id": "q7",  "number": 7,  "text": "The award winning Stone Mansion Restaurant. Casual Fine Dining Outdoor dining. Eight fireside dining rooms. Celebrate MOTHER'S DAY With us May 9th From 1 p.m. — 8 p.m. Wine Spectator Award Winner since 1996. M-Th Dinner 4:30-10:00. F-Sat 4:30-11:00. Closed Sunday." },
+        { "id": "q8",  "number": 8,  "text": "KATHY'S COUNTRY KITCHEN. SENIOR FRIENDS SPECIAL! 10 meals at $4.25 each. Meatloaf, Eggplant Parmesan w/salad & garlic toast, Liver & Onions, Roast Beef Sandwich, Hamburger Steak, Chicken, 1 Grilled Pork Chop, Steak Salad, Ham Steak, Spaghetti w/salad & garlic toast. OPEN 24 HOURS - FRI. & SAT." },
+        { "id": "q9",  "number": 9,  "text": "RED ONION GRILLE. Featuring the biggest menu in Beaver County with over 180 selections. We serve: Pizzas - Wings - Burgers - Pasta - Steaks - Ribs - Asian Foods - Salads... and much more. Hours Sunday to Thursday 6 a.m. to 10 p.m. Friday and Saturday 6 a.m. to 11 p.m." },
+        { "id": "q10", "number": 10, "text": "Little Athens Greek specialty Restaurant. Greek Food & Catering. Live entertainment - Wed., Fri. & Sat. Cafe Frappe. Greek Specialties & Catering." },
+        { "id": "q11", "number": 11, "text": "AMBRIDGE ITALIAN VILLA. Home of the Gyro Sandwich. 10% OFF ANY PURCHASE. No other discounts apply. Expires 5/14/07. Eat in - Take out - Delivery - Catering - Fundraising. Seniors 10% OFF everyday 3-6 p.m. Sunday 10-8, Monday-Thurs. 10-10. Friday & Saturday 10-11. View our complete menu on the Internet." },
+        { "id": "q12", "number": 12, "text": "SCHLOTTERS'S FAMILY Restaurant & Catering. MOTHER'S DAY GRAND BUFFET. May 9th - 11:30 a.m. - 7:00 p.m. Glazed Virginia Ham, Roast Beef aujus, Chicken Marsala, Roasted Redskin Potatoes, Vegetable Medley, Penne Carbonare, Rice Pilaf. Adults $12.95 - Seniors $10.95. Kids 6-10 $6.95 - 5 & under FREE." },
+        { "id": "q13", "number": 13, "text": "THE EMPEROR Chinese Restaurant. 1/2 PRICE OFF DINE IN OR TAKE OUT. 8th Anniversary. Buy one dinner at regular price & receive a second dinner of equal or lesser value at 1/2 price! Expires 5/30/2007. SUNDAY ONLY - Senior citizens full dinners 20% off eat in only. LUNCH CLUB - One order gets one stamp." },
+        { "id": "q14", "number": 14, "text": "Alexander's Restaurant & Lounge. Administrative Professionals Week. April 19th-23rd. Treat your dedicated employees to lunch or dinner. Gift certificates available. All major credit cards accepted. Open 7 days a week." }
+      ],
+      "answers": {
+        "q7":  "B",
+        "q8":  "G",
+        "q9":  "D",
+        "q10": "J",
+        "q11": "E",
+        "q12": "I",
+        "q13": "C",
+        "q14": "A"
+      },
+      "explanations": {
+        "q7":  "Stone Mansion has outdoor dining and celebrates Mother's Day — matches B.",
+        "q8":  "Kathy's Kitchen is open 24 hours on Friday & Saturday — matches G (non-stop on weekday).",
+        "q9":  "Red Onion Grille has over 180 selections — the biggest menu — matches D.",
+        "q10": "Little Athens serves Greek specialities — home-made specialities — matches J.",
+        "q11": "Ambridge Italian Villa offers seniors 10% off every day 3-6 p.m. — matches E.",
+        "q12": "Schlotter's has Kids 5 & under FREE — 4-year-old son eats free — matches I.",
+        "q13": "The Emperor gives senior citizens 20% off on Sundays — matches C.",
+        "q14": "Alexander's is for treating employees (boss invites colleagues) — matches A."
+      }
+    },
+    {
+      "part_number": 3,
+      "title": "Part 3",
+      "instruction": "Read the text and choose the correct heading for each paragraph from the list of headings below. There are more headings than paragraphs, so you will not use all of them. You cannot use any heading more than once.",
+      "type": "heading-match",
+      "passage_title": "QUINOA: A SUPERFOOD?",
+      "passage_subtitle": "",
+      "headings": [
+        { "key": "A", "text": "Quinoa and its relatives" },
+        { "key": "B", "text": "Climatic requirements for its production" },
+        { "key": "C", "text": "The complexities of its harvesting" },
+        { "key": "D", "text": "Effects on growers of rising demand" },
+        { "key": "E", "text": "The importance of the crop to ancient tribes" },
+        { "key": "F", "text": "An increasingly profitable alternative to other grains" },
+        { "key": "G", "text": "The characteristics and botany of the plant" },
+        { "key": "H", "text": "A healthy superfood" }
+      ],
+      "paragraphs": [
+        {
+          "id": "q15",
+          "number": 15,
+          "label": "Paragraph I",
+          "text": "The name 'Quinoa' comes from the Quechua word kinwa or kinuwa and is a flowering plant from the amaranth family. It is a herbaceous annual plant grown as a grain crop primarily for its edible seeds. Quinoa is not a grass, but rather a pseudocereal which is botanically related to spinach and amaranth."
+        },
+        {
+          "id": "q16",
+          "number": 16,
+          "label": "Paragraph II",
+          "text": "The plant was first domesticated by the Andean peoples around 3,000 to 4,000 years ago. It has been an important staple in the Andean cultures where the plant is indigenous but relatively obscure to the rest of the world. The Incas, who held the crop to be sacred, referred to it as chisoya mama or \"mother of all grains\", and it was the Inca emperor who would traditionally sow the first seeds of the season using \"golden implements\"."
+        },
+        {
+          "id": "q17",
+          "number": 17,
+          "label": "Paragraph III",
+          "text": "Quinoa is a dicotyledonous annual plant, and is approximately 1-2 m high. It has broad, generally powdery, hairy, lobed leaves, normally arranged alternately. The woody central stem is branched and depending on the variety it may be green, red or purple. The flowering panicles arise from the top of the plant or from leaf axils along the stem. The green flowers are generally self-fertilizing. The fruits (seeds) are about 2 mm in diameter and of various colours — from white to red or black, depending on the variety."
+        },
+        {
+          "id": "q18",
+          "number": 18,
+          "label": "Paragraph IV",
+          "text": "The growth of the plant is variable due to the number of different subspecies and varieties. However, it is generally undemanding and altitude-hardy; it is grown from coastal regions to over 4,000 m in the Andes near the equator, with most of the cultivars being grown between 2500 m and 4,000 m. Generally, optimal growing conditions are in cool regions with temperatures that vary between -4°C during the night to near 35°C during the heat of the day."
+        },
+        {
+          "id": "q19",
+          "number": 19,
+          "label": "Paragraph V",
+          "text": "Throughout the ages, quinoa grain has been hand-picked, and only rarely by machine, because the extreme variability of the maturity period of most Quinoa cultivars complicates mechanization. Harvest needs to be precisely timed to avoid high seed losses as different panicles on the same plant mature at different times of the year. The crop yield in the Andean region is comparable to wheat yields. In the West, varieties have been selected for uniformity of maturity and are mechanically harvested using conventional combines."
+        },
+        {
+          "id": "q20",
+          "number": 20,
+          "label": "Paragraph VI",
+          "text": "From the early 21st century to today the crop value has risen, mainly due to quinoa becoming more commonly consumed in North America, Europe, and Australasia where it was not typically grown. Indeed, between 2006 and 2013, quinoa crop prices tripled. In 2011, the average price was US $3,115 per tonne with some varieties selling as high as $8,000 per tonne. This compares with wheat prices of $9 per bushel (about US $340 per tonne), making wheat about 10% of the value of quinoa."
+        }
+      ],
+      "answers": {
+        "q15": "A",
+        "q16": "E",
+        "q17": "G",
+        "q18": "B",
+        "q19": "C",
+        "q20": "F"
+      },
+      "explanations": {
+        "q15": "Paragraph I describes the botanical classification of quinoa and its relation to other plants such as spinach and amaranth.",
+        "q16": "Paragraph II explains the importance of quinoa to ancient Andean tribes, particularly the Incas who considered it sacred.",
+        "q17": "Paragraph III details the physical appearance and botanical characteristics of the quinoa plant.",
+        "q18": "Paragraph IV discusses the climatic and altitude requirements for growing quinoa.",
+        "q19": "Paragraph V describes the complexities involved in harvesting quinoa due to uneven maturity periods.",
+        "q20": "Paragraph VI covers the rising price of quinoa and its growing profitability compared to other grains like wheat."
+      }
+    },
+    {
+      "part_number": 4,
+      "title": "Part 4",
+      "instruction": "Read the following text and answer questions 21–29.",
+      "type": "reading-mcq",
+      "passage_title": "Ancient Storytelling",
+      "passage_subtitle": "",
+      "passage_text": "It was told, we suppose, to people crouched around a fire: a tale of adventure, most likely relating some close encounter with death; a remarkable hunt, an escape from mortal danger; a vision, or something else out of the ordinary. Whatever its thread, the weaving of this story was done with a prime purpose. The listeners must be kept listening. They must not fall asleep. So, as the story went on, its audience should be sustained by one question above all. What happens next?\n\nThe first fireside stories in human history can never be known. They were kept in the heads of those who told them. This method of storage is not necessarily inefficient. From documented oral traditions in Australia, the Balkans and other parts of the world we know that specialized storytellers and poets can recite from memory literally thousands of lines, in verse or prose, verbatim—word for word. But while memory is rightly considered an art in itself, it is clear that a primary purpose of making symbols is to have a system of reminders or mnemonic cues – signs that assist us to recall certain information in the mind's eye. In some Polynesian communities, a notched memory stick may help to guide a storyteller through successive stages of recitation. But in other parts of the world, the activity of storytelling historically resulted in the development or even the invention of writing systems.\n\nOne theory about the arrival of literacy in ancient Greece, for example, argues that the epic tales about the Trojan War and the wanderings of Odysseus – traditionally attributed to Homer – were just so enchanting to hear that they had to be preserved. So the Greeks, c.750-700BC, borrowed an alphabet from their neighbors in the eastern Mediterranean, the Phoenicians.\n\nThe custom of recording stories on parchment and other materials can be traced in many manifestations around the world, from the priestly papyrus archives of ancient Egypt to the birch-bark scrolls on which the North American Ojibway Indians set down their creation myth. It is a well-tried and universal practice: so much so that to this day storytime is probably most often associated with words on paper. The formal practice of narrating a story aloud would seem—so we assume—to have given way to newspapers, novels and comic strips. This, however, is not the case. Statistically, it is doubtful that the majority of humans currently rely upon the written word to get access to stories. So what is the alternative source?\n\nEach year, over 7 billion people will go to watch the latest offering from Hollywood, Bollywood and beyond. The supreme storyteller of today is cinema. The movies, as distinct from still photography, seem to be an essential modern phenomenon. This is an illusion, for there are certain ways in which the medium of film is indebted to very old precedents of arranging sequences of images. But any account of visual storytelling must begin with the recognition that all storytelling beats with a deeply atavistic pulse: that is, a 'good story' relies upon formal patterns of plot and characterisation that have been embedded in the practice of storytelling over many generations.\n\nThousands of scripts arrive every week at the offices of the major film studios. But aspiring screenwriters really need to look no further for essential advice than the fourth-century BC Greek philosopher Aristotle. He left some incomplete lecture notes on the art of telling stories in various literary and dramatic modes, a slim volume known as The Poetics. Though he can never have envisaged the popcorn-fuelled actuality of a multiplex cinema, Aristotle is almost prescient about the key elements required to get the crowds flocking to such a cultural hub. He analyzed the process with cool rationalism. When a story enchants us, we lose the sense of where we are; we are drawn into the story so thoroughly that we forget it is a story being told. This is, in Aristotle's phrase, 'the suspension of disbelief.'",
+      "question_groups": [
+        {
+          "title": "Questions 21–24",
+          "instruction": "Choose the correct answer A, B, C, or D.",
+          "questions": [
+            {
+              "id": "q21",
+              "number": 21,
+              "type": "mcq",
+              "text": "What was the main goal of the earliest fireside stories?",
+              "options": [
+                { "key": "A", "text": "To entertain with humor" },
+                { "key": "B", "text": "To keep the audience attentive and awake" },
+                { "key": "C", "text": "To impart moral lessons" },
+                { "key": "D", "text": "To record historical events" }
+              ]
+            },
+            {
+              "id": "q22",
+              "number": 22,
+              "type": "mcq",
+              "text": "What does the passage imply about the first storytellers?",
+              "options": [
+                { "key": "A", "text": "They heavily relied on written texts." },
+                { "key": "B", "text": "They used memory techniques to retain stories." },
+                { "key": "C", "text": "They recorded tales on parchment." },
+                { "key": "D", "text": "They avoided using symbols or cues." }
+              ]
+            },
+            {
+              "id": "q23",
+              "number": 23,
+              "type": "mcq",
+              "text": "Why did the ancient Greeks reportedly adopt an alphabet from the Phoenicians?",
+              "options": [
+                { "key": "A", "text": "To document agricultural practices" },
+                { "key": "B", "text": "To preserve epic tales like those of the Trojan War" },
+                { "key": "C", "text": "To improve trade and communication" },
+                { "key": "D", "text": "To create a legal system" }
+              ]
+            },
+            {
+              "id": "q24",
+              "number": 24,
+              "type": "mcq",
+              "text": "According to the passage, what serves as the modern equivalent of ancient storytelling?",
+              "options": [
+                { "key": "A", "text": "Newspapers and novels" },
+                { "key": "B", "text": "Radio broadcasts" },
+                { "key": "C", "text": "Cinema" },
+                { "key": "D", "text": "Social media platforms" }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Questions 25–29",
+          "instruction": "Decide if the following statements agree with the information given in the text. Choose True, False, or Not Given.",
+          "questions": [
+            {
+              "id": "q25",
+              "number": 25,
+              "type": "tfng",
+              "text": "The earliest fireside stories primarily focused on the afterlife."
+            },
+            {
+              "id": "q26",
+              "number": 26,
+              "type": "tfng",
+              "text": "In some cultures, storytellers used notched sticks to help them remember the sequence of events."
+            },
+            {
+              "id": "q27",
+              "number": 27,
+              "type": "tfng",
+              "text": "The ancient Greeks developed their alphabet independently, without outside influence."
+            },
+            {
+              "id": "q28",
+              "number": 28,
+              "type": "tfng",
+              "text": "The Ojibway Indians recorded their creation myths on birch-bark scrolls."
+            },
+            {
+              "id": "q29",
+              "number": 29,
+              "type": "tfng",
+              "text": "Aristotle's 'The Poetics' offers insights that are still relevant for modern screenwriters."
+            }
+          ]
+        }
+      ],
+      "answers": {
+        "q21": "B",
+        "q22": "B",
+        "q23": "B",
+        "q24": "C",
+        "q25": "False",
+        "q26": "True",
+        "q27": "False",
+        "q28": "True",
+        "q29": "True"
+      },
+      "explanations": {
+        "q21": "Passage birinchi paragrafda asosiy maqsad tinglovchilarni uxlatmaslik ekanligini aytadi.",
+        "q22": "Storytellers minglab satrlarni yod olgan — memory techniques ishlatishgan.",
+        "q23": "Greeks Trojans haqidagi epik dostonlarni saqlab qolish uchun Phoenicians alfabetini olishgan.",
+        "q24": "Passage 'The supreme storyteller of today is cinema' deb aniq aytadi.",
+        "q25": "Passage afterlife haqida hech narsa aytmaydi — False.",
+        "q26": "Polynesian communities da notched memory stick ishlatilgani aytilgan — True.",
+        "q27": "Greeks Phoenicians dan alphabet olgan — False.",
+        "q28": "Ojibway Indians birch-bark scrolls ga creation myth yozgan — True.",
+        "q29": "Aristotle's Poetics hozirgi screenwriters uchun ham relevant ekani aytilgan — True."
+      }
+    },
+    {
+      "part_number": 5,
+      "title": "Part 5",
+      "instruction": "Read the following text and answer questions 30–35.",
+      "type": "reading-mixed",
+      "passage_title": "The Benefits of Urban Green Spaces",
+      "passage_subtitle": "",
+      "passage_text": "Urban green spaces, such as parks, gardens, and green rooftops, provide numerous benefits to city dwellers. These areas, often incorporated into city planning, serve as vital components of urban environments.\n\nTheir advantages extend beyond mere aesthetics, impacting health, social interaction, and the environment. One significant benefit of urban green spaces is their positive effect on mental health. Studies have shown that access to green areas can reduce stress, anxiety, and depression among city residents. Natural environments offer a respite from the fast-paced urban lifestyle, allowing individuals to relax and rejuvenate.\n\nIn addition to mental health benefits, green spaces play a crucial role in promoting physical activity. Parks and recreational areas provide opportunities for exercise, such as walking, jogging, and sports, contributing to overall physical well-being. The availability of these spaces encourages a more active lifestyle, which is essential for preventing obesity and related health issues.\n\nUrban green spaces also contribute to environmental sustainability. They help improve air quality by absorbing pollutants and producing oxygen. Trees and plants in these areas can mitigate the urban heat island effect, where cities become significantly warmer than their rural surroundings. This cooling effect is particularly important in combating the impacts of climate change.\n\nMoreover, green spaces foster social interaction and community engagement. They serve as gathering spots for people of all ages, promoting social cohesion and a sense of belonging. Community events, such as festivals and farmers' markets, often take place in these areas, strengthening neighborhood bonds.",
+      "question_groups": [
+        {
+          "type": "fitb",
+          "title": "Questions 30–33",
+          "instruction": "Fill in the missing information. Write NO MORE THAN ONE WORD and/or A NUMBER for each answer.",
+          "summary_passage": "One significant benefit of urban green spaces is their positive effect on {q30} health, including reduced stress and anxiety. Green spaces provide opportunities for physical {q31}, such as walking and jogging, which contribute to physical well-being. Urban green spaces help improve air quality by absorbing {q32} and producing oxygen. These areas foster {q33} interaction and community engagement through social gatherings and events.",
+          "questions": [
+            {
+              "id": "q30",
+              "number": 30,
+              "correctAnswer": "mental"
+            },
+            {
+              "id": "q31",
+              "number": 31,
+              "correctAnswer": "activity"
+            },
+            {
+              "id": "q32",
+              "number": 32,
+              "correctAnswer": "pollutants"
+            },
+            {
+              "id": "q33",
+              "number": 33,
+              "correctAnswer": "social"
+            }
+          ]
+        },
+        {
+          "type": "mcq",
+          "title": "Questions 34–35",
+          "instruction": "Choose the correct answer A, B, C, or D.",
+          "questions": [
+            {
+              "id": "q34",
+              "number": 34,
+              "text": "How do urban green spaces contribute to physical health?",
+              "options": [
+                { "key": "A", "text": "By providing spaces for indoor activities." },
+                { "key": "B", "text": "By offering opportunities for outdoor exercise." },
+                { "key": "C", "text": "By increasing pollution levels." },
+                { "key": "D", "text": "By reducing social interaction." }
+              ]
+            },
+            {
+              "id": "q35",
+              "number": 35,
+              "text": "What is one environmental benefit of urban green spaces?",
+              "options": [
+                { "key": "A", "text": "They increase the urban heat island effect." },
+                { "key": "B", "text": "They help to cool the surrounding areas." },
+                { "key": "C", "text": "They contribute to noise pollution." },
+                { "key": "D", "text": "They reduce the amount of oxygen in the atmosphere." }
+              ]
+            }
+          ]
+        }
+      ],
+      "answers": {
+        "q34": "B",
+        "q35": "B"
+      },
+      "explanations": {
+        "q30": "'mental' health — passage aniq aytadi: 'positive effect on mental health'.",
+        "q31": "'activity' — 'promoting physical activity' deb yozilgan.",
+        "q32": "'pollutants' — 'absorbing pollutants and producing oxygen'.",
+        "q33": "'social' — 'foster social interaction and community engagement'.",
+        "q34": "B — 'Parks provide opportunities for exercise such as walking, jogging, and sports'.",
+        "q35": "B — 'This cooling effect is particularly important...' green spaces cool surrounding areas."
+      }
+    }
+  ]
+}

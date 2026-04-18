@@ -181,7 +181,7 @@ def get_public_tests(section: str = None, db: Session = Depends(get_db)):
     result = []
     for t in tests:
         cat = db.query(Category).filter(Category.id == t.category_id).first()
-        pdf_url = f"http://127.0.0.1:8000/static/pdfs/{t.pdf_filename}" if t.pdf_filename else None
+        pdf_url = f"https://api.multx.uz/static/pdfs/{t.pdf_filename}" if t.pdf_filename else None
         result.append({
             "id": t.id, "name": t.name,
             "category_name": cat.name if cat else "Other",

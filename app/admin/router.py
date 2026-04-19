@@ -1,10 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, Header, UploadFile, File, Form
-from fastapi.responses import FileResponse
+from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
 from ..database import get_db
 from ..models import User, Category, Test, Feedback
 from ..utils.jwt import decode_token
-import os, shutil, uuid, json
+import os, uuid, json, boto3
+from botocore.client import Config
 from ..models import Question
 from ..schemas import QuestionCreate
 from typing import Optional
@@ -13,7 +14,44 @@ from datetime import datetime, timedelta, timezone
 
 router = APIRouter(prefix="/admin", tags=["Admin"])
 
+# ── Cloudflare R2 client ──
+R2_ACCESS_KEY_ID     = os.environ.get("R2_ACCESS_KEY_ID")
+R2_SECRET_ACCESS_KEY = os.environ.get("R2_SECRET_ACCESS_KEY")
+R2_ACCOUNT_ID        = os.environ.get("R2_ACCOUNT_ID")
+R2_BUCKET_NAME       = os.environ.get("R2_BUCKET_NAME", "multix-files")
+R2_PUBLIC_URL        = os.environ.get("R2_PUBLIC_URL", "").rstrip("/")
 
+def get_r2_client():
+    return boto3.client(
+        "s3",
+        endpoint_url=f"https://{R2_ACCOUNT_ID}.r2.cloudflarestorage.com",
+        aws_access_key_id=R2_ACCESS_KEY_ID,
+        aws_secret_access_key=R2_SECRET_ACCESS_KEY,
+        config=Config(signature_version="s3v4"),
+        region_name="auto",
+    )
+
+def upload_to_r2(content: bytes, key: str, content_type: str) -> str:
+    """R2 ga fayl yuklash va public URL qaytarish"""
+    client = get_r2_client()
+    client.put_object(
+        Bucket=R2_BUCKET_NAME,
+        Key=key,
+        Body=content,
+        ContentType=content_type,
+    )
+    return f"{R2_PUBLIC_URL}/{key}"
+
+def delete_from_r2(key: str):
+    """R2 dan fayl o'chirish"""
+    try:
+        client = get_r2_client()
+        client.delete_object(Bucket=R2_BUCKET_NAME, Key=key)
+    except Exception:
+        pass
+
+
+# ── Admin auth ──
 def get_admin_user(authorization: str = Header(None), db: Session = Depends(get_db)):
     if not authorization or not authorization.startswith("Bearer "):
         raise HTTPException(status_code=401, detail="Token yo'q")
@@ -86,15 +124,9 @@ def delete_category(cat_id: int, db: Session = Depends(get_db), admin=Depends(ge
     tests = db.query(Test).filter(Test.category_id == cat_id).all()
     for test in tests:
         if test.pdf_filename:
-            try:
-                os.remove(f"static/pdfs/{test.pdf_filename}")
-            except:
-                pass
+            delete_from_r2(f"pdfs/{test.pdf_filename}")
         if test.json_filename:
-            try:
-                os.remove(f"static/jsons/{test.json_filename}")
-            except:
-                pass
+            delete_from_r2(f"jsons/{test.json_filename}")
         db.delete(test)
     db.flush()
     db.delete(cat)
@@ -120,7 +152,7 @@ def get_tests(section: str = None, db: Session = Depends(get_db), admin=Depends(
             "section": t.skill,
             "level": t.level,
             "type": t.test_type,
-            "parts": t.parts or "1,2,3,4,5",   # ← DB dagi haqiqiy qiymat
+            "parts": t.parts or "1,2,3,4,5",
             "duration": t.duration,
             "questions_count": t.questions_count,
             "telegram_channel": t.telegram_channel,
@@ -155,18 +187,16 @@ async def create_test(
     if not cat:
         raise HTTPException(status_code=400, detail="Kategoriya topilmadi")
 
-    # PDF saqlash
+    # ── PDF → R2 ga yuklash ──
     pdf_filename = None
     if pdf_file and pdf_file.filename:
-        os.makedirs("static/pdfs", exist_ok=True)
         ext = pdf_file.filename.split('.')[-1]
         unique_name = f"{uuid.uuid4()}.{ext}"
-        file_path = f"static/pdfs/{unique_name}"
-        with open(file_path, "wb") as f:
-            shutil.copyfileobj(pdf_file.file, f)
+        content = await pdf_file.read()
+        upload_to_r2(content, f"pdfs/{unique_name}", "application/pdf")
         pdf_filename = unique_name
 
-    # JSON saqlash
+    # ── JSON → R2 ga yuklash ──
     json_filename = None
     if json_file and json_file.filename:
         if not json_file.filename.endswith(".json"):
@@ -178,11 +208,8 @@ async def create_test(
             raise HTTPException(status_code=400, detail="JSON fayl noto'g'ri formatda")
         if "parts" not in parsed:
             raise HTTPException(status_code=400, detail="JSON da 'parts' array bo'lishi kerak")
-        os.makedirs("static/jsons", exist_ok=True)
         unique_name = f"{uuid.uuid4()}.json"
-        file_path = f"static/jsons/{unique_name}"
-        with open(file_path, "wb") as f:
-            f.write(content)
+        upload_to_r2(content, f"jsons/{unique_name}", "application/json")
         json_filename = unique_name
 
     test = Test(
@@ -197,7 +224,7 @@ async def create_test(
         telegram_link=telegram_link,
         pdf_filename=pdf_filename,
         json_filename=json_filename,
-        parts=parts,        # ← TUZATILDI: endi parts saqlanadi
+        parts=parts,
     )
     db.add(test)
     db.commit()
@@ -205,7 +232,7 @@ async def create_test(
     return {"message": "Test qo'shildi", "id": test.id}
 
 
-# ── JSON FAYL OLISH ──
+# ── JSON FAYL OLISH — R2 dan redirect ──
 @router.get("/tests/{test_id}/json-data")
 def get_test_json(test_id: int, db: Session = Depends(get_db)):
     test = db.query(Test).filter(Test.id == test_id, Test.is_active == True).first()
@@ -213,10 +240,10 @@ def get_test_json(test_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Test topilmadi")
     if not test.json_filename:
         raise HTTPException(status_code=404, detail="Bu test uchun JSON fayl yo'q")
-    file_path = f"static/jsons/{test.json_filename}"
-    if not os.path.exists(file_path):
-        raise HTTPException(status_code=404, detail="JSON fayl serverda topilmadi")
-    return FileResponse(file_path, media_type="application/json")
+
+    # R2 public URL ga redirect
+    r2_url = f"{R2_PUBLIC_URL}/jsons/{test.json_filename}"
+    return RedirectResponse(url=r2_url)
 
 
 @router.delete("/tests/{test_id}")
@@ -225,15 +252,9 @@ def delete_test(test_id: int, db: Session = Depends(get_db), admin=Depends(get_a
     if not test:
         raise HTTPException(status_code=404, detail="Topilmadi")
     if test.pdf_filename:
-        try:
-            os.remove(f"static/pdfs/{test.pdf_filename}")
-        except:
-            pass
+        delete_from_r2(f"pdfs/{test.pdf_filename}")
     if test.json_filename:
-        try:
-            os.remove(f"static/jsons/{test.json_filename}")
-        except:
-            pass
+        delete_from_r2(f"jsons/{test.json_filename}")
     test.is_active = False
     db.commit()
     return {"message": "O'chirildi"}
@@ -243,9 +264,6 @@ def delete_test(test_id: int, db: Session = Depends(get_db), admin=Depends(get_a
 @router.get("/users")
 def get_users(db: Session = Depends(get_db), admin=Depends(get_admin_user)):
     return db.query(User).order_by(User.created_at.desc()).all()
-
-
-# YANGI
 
 
 @router.put("/users/{user_id}/premium")
@@ -258,16 +276,14 @@ def update_premium(
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User topilmadi")
-    
+
     if is_premium:
-        # 1 oy premium berish
         user.is_premium = True
         user.premium_until = datetime.now(timezone.utc) + timedelta(days=30)
     else:
-        # Manual revoke
         user.is_premium = False
         user.premium_until = None
-    
+
     db.commit()
     return {
         "message": "Yangilandi",

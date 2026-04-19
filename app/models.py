@@ -75,7 +75,7 @@ class Test(Base):
     telegram_link = Column(String(500), nullable=True)
     pdf_filename = Column(String(300), nullable=True)
     json_filename = Column(String(300), nullable=True)
-    parts = Column(String(50), nullable=True, default="1,2,3,4,5")
+    parts = Column(String(50), nullable=True, default="1,2,3,4,5,6")
 
 
 class Question(Base):
@@ -139,3 +139,22 @@ class TestAttempt(Base):
 
     # Foydalanuvchi javoblari (JSON) — review uchun
     user_answers = Column(JSON, nullable=True)   # { "q1": "A", "q2": "mental", ... }
+
+
+
+class ListeningTest(Base):
+    __tablename__ = "listening_tests"
+
+    id           = Column(Integer, primary_key=True, index=True)
+    name         = Column(String(200), nullable=False)
+    description  = Column(String(400), nullable=True)
+    category_id  = Column(Integer, ForeignKey("categories.id"), nullable=False)
+    level        = Column(String(20), nullable=True)          # easy / medium / hard
+    test_type    = Column(String(20), nullable=True)          # free / premium
+    format       = Column(String(20), nullable=True)          # full / part
+    parts        = Column(String(50), nullable=True, default="1,2,3,4")
+    duration     = Column(Integer, nullable=True, default=40)
+    is_active    = Column(Boolean, default=True)
+    audio_url    = Column(String(500), nullable=True)         # R2 audio URL
+    json_filename = Column(String(300), nullable=True)        # R2 json fayl nomi
+    created_at   = Column(DateTime(timezone=True), server_default=func.now())

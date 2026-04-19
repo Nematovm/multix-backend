@@ -232,6 +232,39 @@ async def create_test(
     return {"message": "Test qo'shildi", "id": test.id}
 
 
+# ── Bu qismni admin/router.py ga qo'shing (create_test dan keyin) ──
+
+@router.post("/upload-audio")
+async def upload_audio(
+    audio_file: UploadFile = File(...),
+    db: Session = Depends(get_db),
+    admin=Depends(get_admin_user)
+):
+    """Audio faylni R2 ga yuklash va public URL qaytarish"""
+    allowed = ['.mp3', '.wav', '.ogg', '.m4a', '.aac']
+    ext = os.path.splitext(audio_file.filename)[1].lower()
+    if ext not in allowed:
+        raise HTTPException(status_code=400, detail=f"Faqat audio fayl: {', '.join(allowed)}")
+
+    content     = await audio_file.read()
+    unique_name = f"{uuid.uuid4()}{ext}"
+    content_type_map = {
+        '.mp3': 'audio/mpeg',
+        '.wav': 'audio/wav',
+        '.ogg': 'audio/ogg',
+        '.m4a': 'audio/mp4',
+        '.aac': 'audio/aac',
+    }
+    upload_to_r2(content, f"audios/{unique_name}", content_type_map.get(ext, 'audio/mpeg'))
+    public_url = f"{R2_PUBLIC_URL}/audios/{unique_name}"
+
+    return {
+        "message": "Audio yuklandi",
+        "filename": unique_name,
+        "url": public_url
+    }
+
+
 # ── JSON FAYL OLISH — R2 dan redirect ──
 @router.get("/tests/{test_id}/json-data")
 def get_test_json(test_id: int, db: Session = Depends(get_db)):
@@ -386,3 +419,138 @@ def delete_feedback(feedback_id: int, db: Session = Depends(get_db), admin=Depen
     db.delete(fb)
     db.commit()
     return {"message": "O'chirildi"}
+
+
+
+# ═══════════════════════════════════════════════
+# ── LISTENING TESTS ──
+# ═══════════════════════════════════════════════
+
+@router.get("/listening-tests")
+def get_listening_tests(db: Session = Depends(get_db), admin=Depends(get_admin_user)):
+    from ..models import ListeningTest
+    tests = db.query(ListeningTest).filter(ListeningTest.is_active == True).all()
+    result = []
+    for t in tests:
+        cat = db.query(Category).filter(Category.id == t.category_id).first()
+        result.append({
+            "id":           t.id,
+            "name":         t.name,
+            "category_id":  t.category_id,
+            "category_name": cat.name if cat else "—",
+            "level":        t.level,
+            "type":         t.test_type,
+            "format":       t.format,
+            "parts":        t.parts or "1,2,3,4",
+            "duration":     t.duration,
+            "audio_url":    t.audio_url,
+            "has_audio":    bool(t.audio_url),
+            "json_filename": t.json_filename,
+            "has_json":     bool(t.json_filename),
+        })
+    return result
+
+
+@router.post("/listening-tests")
+async def create_listening_test(
+    name:         str        = Form(...),
+    category_id:  int        = Form(...),
+    level:        str        = Form("medium"),
+    type:         str        = Form("free"),
+    format:       str        = Form("full"),
+    parts:        str        = Form("1,2,3,4"),
+    duration:     int        = Form(40),
+    audio_file:   UploadFile = File(None),
+    json_file:    UploadFile = File(None),
+    db: Session = Depends(get_db),
+    admin=Depends(get_admin_user)
+):
+    from ..models import ListeningTest
+
+    cat = db.query(Category).filter(Category.id == category_id).first()
+    if not cat:
+        raise HTTPException(status_code=400, detail="Kategoriya topilmadi")
+
+    # ── Audio → R2 ──
+    audio_url = None
+    if audio_file and audio_file.filename:
+        allowed_audio = ['.mp3', '.wav', '.ogg', '.m4a', '.aac']
+        ext = os.path.splitext(audio_file.filename)[1].lower()
+        if ext not in allowed_audio:
+            raise HTTPException(status_code=400, detail=f"Faqat audio fayl: {', '.join(allowed_audio)}")
+        content = await audio_file.read()
+        unique_name = f"{uuid.uuid4()}{ext}"
+        ct_map = {'.mp3':'audio/mpeg','.wav':'audio/wav','.ogg':'audio/ogg','.m4a':'audio/mp4','.aac':'audio/aac'}
+        upload_to_r2(content, f"audios/{unique_name}", ct_map.get(ext, 'audio/mpeg'))
+        audio_url = f"{R2_PUBLIC_URL}/audios/{unique_name}"
+
+    # ── JSON → R2 ──
+    json_filename = None
+    if json_file and json_file.filename:
+        if not json_file.filename.endswith(".json"):
+            raise HTTPException(status_code=400, detail="Faqat .json fayl yuklang")
+        content = await json_file.read()
+        try:
+            parsed = json.loads(content)
+        except json.JSONDecodeError:
+            raise HTTPException(status_code=400, detail="JSON fayl noto'g'ri formatda")
+        if "parts" not in parsed:
+            raise HTTPException(status_code=400, detail="JSON da 'parts' array bo'lishi kerak")
+        unique_name = f"{uuid.uuid4()}.json"
+        upload_to_r2(content, f"jsons/{unique_name}", "application/json")
+        json_filename = unique_name
+
+    test = ListeningTest(
+        name=name,
+        category_id=category_id,
+        level=level,
+        test_type=type,
+        format=format,
+        parts=parts,
+        duration=duration,
+        audio_url=audio_url,
+        json_filename=json_filename,
+    )
+    db.add(test)
+    db.commit()
+    db.refresh(test)
+    return {"message": "Listening test qo'shildi", "id": test.id}
+
+
+@router.delete("/listening-tests/{test_id}")
+def delete_listening_test(test_id: int, db: Session = Depends(get_db), admin=Depends(get_admin_user)):
+    from ..models import ListeningTest
+    test = db.query(ListeningTest).filter(ListeningTest.id == test_id).first()
+    if not test:
+        raise HTTPException(status_code=404, detail="Topilmadi")
+    # R2 dan o'chirish
+    if test.json_filename:
+        delete_from_r2(f"jsons/{test.json_filename}")
+    if test.audio_url:
+        # audio URL dan fayl nomini ajratib olish
+        audio_key = "audios/" + test.audio_url.split("/audios/")[-1]
+        delete_from_r2(audio_key)
+    test.is_active = False
+    db.commit()
+    return {"message": "O'chirildi"}
+
+
+@router.get("/listening-tests/{test_id}/json-data")
+def get_listening_test_json(test_id: int, db: Session = Depends(get_db)):
+    from ..models import ListeningTest
+    test = db.query(ListeningTest).filter(ListeningTest.id == test_id, ListeningTest.is_active == True).first()
+    if not test or not test.json_filename:
+        raise HTTPException(status_code=404, detail="JSON topilmadi")
+    return RedirectResponse(url=f"{R2_PUBLIC_URL}/jsons/{test.json_filename}")
+
+
+def upload_to_r2(content, key, content_type):
+    client.put_object(
+        Bucket=R2_BUCKET_NAME,
+        Key=key,
+        Body=content,
+        ContentType=content_type,
+    )
+    return f"{R2_PUBLIC_URL}/{key}"
+
+

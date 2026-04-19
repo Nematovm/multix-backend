@@ -11,6 +11,7 @@ from .utils.jwt import decode_token
 from pydantic import BaseModel
 from typing import Optional, Dict, Any
 import os
+from .models import ListeningTest
 
 Base.metadata.create_all(bind=engine)
 
@@ -194,6 +195,28 @@ def get_public_tests(section: str = None, db: Session = Depends(get_db)):
             "telegram_channel": t.telegram_channel,
             "telegram_link": t.telegram_link,
             "pdf_url": pdf_url,
+        })
+    return result
+
+
+@app.get("/listening-tests")
+def get_public_listening_tests(db: Session = Depends(get_db)):
+    from .models import ListeningTest, Category
+    tests = db.query(ListeningTest).filter(ListeningTest.is_active == True).all()
+    result = []
+    for t in tests:
+        cat = db.query(Category).filter(Category.id == t.category_id).first()
+        result.append({
+            "id":             t.id,
+            "name":           t.name,
+            "category_name":  cat.name if cat else "Other",
+            "level":          t.level,
+            "type":           t.test_type,
+            "parts":          t.parts or "1,2,3,4,5,6",
+            "duration":       t.duration,
+            "audio_url":      t.audio_url,
+            "has_audio":      bool(t.audio_url),
+            "questions_count": 40,
         })
     return result
 

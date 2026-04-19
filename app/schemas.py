@@ -148,3 +148,14 @@ class QuestionResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class ListeningTestCreate(BaseModel):
+    name: str
+    category_id: int
+    level: str = "medium"
+    test_type: str = "free"
+    format: str = "full"
+    parts: str = "1,2,3,4"
+    duration: int = 40
+    description: Optional[str] = None

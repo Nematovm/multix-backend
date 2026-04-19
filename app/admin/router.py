@@ -31,9 +31,10 @@ def get_r2_client():
         region_name="auto",
     )
 
+
+# TO'G'RI — bu qolsin (fayl boshida)
 def upload_to_r2(content: bytes, key: str, content_type: str) -> str:
-    """R2 ga fayl yuklash va public URL qaytarish"""
-    client = get_r2_client()
+    client = get_r2_client()   # ← client shu yerda yaratiladi
     client.put_object(
         Bucket=R2_BUCKET_NAME,
         Key=key,
@@ -544,13 +545,6 @@ def get_listening_test_json(test_id: int, db: Session = Depends(get_db)):
     return RedirectResponse(url=f"{R2_PUBLIC_URL}/jsons/{test.json_filename}")
 
 
-def upload_to_r2(content, key, content_type):
-    client.put_object(
-        Bucket=R2_BUCKET_NAME,
-        Key=key,
-        Body=content,
-        ContentType=content_type,
-    )
-    return f"{R2_PUBLIC_URL}/{key}"
+
 
 

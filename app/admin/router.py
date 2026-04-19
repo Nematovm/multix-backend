@@ -8,6 +8,7 @@ import os, shutil, uuid, json
 from ..models import Question
 from ..schemas import QuestionCreate
 from typing import Optional
+from datetime import datetime, timedelta, timezone
 
 
 router = APIRouter(prefix="/admin", tags=["Admin"])
@@ -244,6 +245,9 @@ def get_users(db: Session = Depends(get_db), admin=Depends(get_admin_user)):
     return db.query(User).order_by(User.created_at.desc()).all()
 
 
+# YANGI
+
+
 @router.put("/users/{user_id}/premium")
 def update_premium(
     user_id: int,
@@ -254,9 +258,22 @@ def update_premium(
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User topilmadi")
-    user.is_premium = is_premium
+    
+    if is_premium:
+        # 1 oy premium berish
+        user.is_premium = True
+        user.premium_until = datetime.now(timezone.utc) + timedelta(days=30)
+    else:
+        # Manual revoke
+        user.is_premium = False
+        user.premium_until = None
+    
     db.commit()
-    return {"message": "Yangilandi"}
+    return {
+        "message": "Yangilandi",
+        "is_premium": user.is_premium,
+        "premium_until": user.premium_until.isoformat() if user.premium_until else None
+    }
 
 
 # ── QUESTIONS ──

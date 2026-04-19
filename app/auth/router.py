@@ -9,6 +9,7 @@ from ..schemas import EmailRequest, OTPVerifyRequest, RegisterRequest, LoginRequ
 from sqlalchemy.orm import Session
 from ..database import get_db
 from . import service
+from datetime import datetime, timezone
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
@@ -62,6 +63,9 @@ def login(request: LoginRequest, req: FastAPIRequest, db: Session = Depends(get_
     ua = req.headers.get("user-agent", "")
     return service.login_user(db, request.email, request.password, ip=ip, device=ua[:200])
 
+
+
+# YANGI (to'g'ri)
 @router.get("/me")
 def get_me(authorization: str = Header(None), db: Session = Depends(get_db)):
     if not authorization or not authorization.startswith("Bearer "):
@@ -76,15 +80,22 @@ def get_me(authorization: str = Header(None), db: Session = Depends(get_db)):
     if not user:
         raise HTTPException(status_code=404, detail="Foydalanuvchi topilmadi")
     
+    # Premium muddatini tekshirish
+    if user.is_premium and user.premium_until:
+        if datetime.now(timezone.utc) > user.premium_until:
+            user.is_premium = False
+            user.premium_until = None
+            db.commit()
+    
     return {
-    "id": user.id,
-    "email": user.email,
-    "first_name": user.first_name,
-    "last_name": user.last_name,
-    "is_verified": user.is_verified,
-    "is_premium": user.is_premium,
-    "is_admin": user.is_admin,
-}
+        "id": user.id,
+        "email": user.email,
+        "first_name": user.first_name,
+        "last_name": user.last_name,
+        "is_verified": user.is_verified,
+        "is_premium": user.is_premium,
+        "is_admin": user.is_admin,
+    }
 
 @router.put("/me/profile")
 def update_profile(

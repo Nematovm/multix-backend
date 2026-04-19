@@ -15,7 +15,9 @@ class User(Base):
     is_active = Column(Boolean, default=True)
     is_verified = Column(Boolean, default=False)
     is_admin = Column(Boolean, default=False)
+    # YANGI
     is_premium = Column(Boolean, default=False)
+    premium_until = Column(DateTime(timezone=True), nullable=True)
     google_id = Column(String, nullable=True, unique=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())

@@ -497,8 +497,18 @@ async def create_listening_test(
             raise HTTPException(status_code=400, detail="JSON fayl noto'g'ri formatda")
         if "parts" not in parsed:
             raise HTTPException(status_code=400, detail="JSON da 'parts' array bo'lishi kerak")
+# ── Audio URL ni JSON ichida avtomatik almashtirish ──
+        if audio_url:
+            if "audio_url" in parsed:
+                parsed["audio_url"] = audio_url
+            for part in parsed.get("parts", []):
+                if "audio_url" in part:
+                    part["audio_url"] = audio_url
+
+        # O'zgartirilgan JSON ni R2 ga yuklash
+        updated_content = json.dumps(parsed, ensure_ascii=False).encode("utf-8")
         unique_name = f"{uuid.uuid4()}.json"
-        upload_to_r2(content, f"jsons/{unique_name}", "application/json")
+        upload_to_r2(updated_content, f"jsons/{unique_name}", "application/json")
         json_filename = unique_name
 
     test = ListeningTest(

@@ -498,12 +498,17 @@ async def create_listening_test(
         if "parts" not in parsed:
             raise HTTPException(status_code=400, detail="JSON da 'parts' array bo'lishi kerak")
 # ── Audio URL ni JSON ichida avtomatik almashtirish ──
+# ── Audio URL ni JSON ichida avtomatik almashtirish ──
         if audio_url:
             if "audio_url" in parsed:
                 parsed["audio_url"] = audio_url
             for part in parsed.get("parts", []):
                 if "audio_url" in part:
                     part["audio_url"] = audio_url
+                # explanations ichidagi audio_url larni ham almashtirish
+                for expl in part.get("explanations", {}).values():
+                    if isinstance(expl, dict) and "audio_url" in expl:
+                        expl["audio_url"] = audio_url
 
         # O'zgartirilgan JSON ni R2 ga yuklash
         updated_content = json.dumps(parsed, ensure_ascii=False).encode("utf-8")

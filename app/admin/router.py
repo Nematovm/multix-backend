@@ -462,6 +462,7 @@ async def create_listening_test(
     parts:        str        = Form("1,2,3,4"),
     duration:     int        = Form(40),
     audio_file:   UploadFile = File(None),
+    map_image:    UploadFile = File(None),
     json_file:    UploadFile = File(None),
     db: Session = Depends(get_db),
     admin=Depends(get_admin_user)
@@ -485,6 +486,19 @@ async def create_listening_test(
         upload_to_r2(content, f"audios/{unique_name}", ct_map.get(ext, 'audio/mpeg'))
         audio_url = f"{R2_PUBLIC_URL}/audios/{unique_name}"
 
+    # ── Map Image → R2 ──
+    map_image_url = None
+    if map_image and map_image.filename:
+        allowed_img = ['.png', '.jpg', '.jpeg', '.webp', '.gif']
+        ext = os.path.splitext(map_image.filename)[1].lower()
+        if ext not in allowed_img:
+            raise HTTPException(status_code=400, detail=f"Faqat rasm fayl: {', '.join(allowed_img)}")
+        content = await map_image.read()
+        unique_name = f"{uuid.uuid4()}{ext}"
+        ct_img = {'.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.webp':'image/webp','.gif':'image/gif'}
+        upload_to_r2(content, f"images/{unique_name}", ct_img.get(ext, 'image/png'))
+        map_image_url = f"{R2_PUBLIC_URL}/images/{unique_name}"
+
     # ── JSON → R2 ──
     json_filename = None
     if json_file and json_file.filename:
@@ -497,20 +511,24 @@ async def create_listening_test(
             raise HTTPException(status_code=400, detail="JSON fayl noto'g'ri formatda")
         if "parts" not in parsed:
             raise HTTPException(status_code=400, detail="JSON da 'parts' array bo'lishi kerak")
-# ── Audio URL ni JSON ichida avtomatik almashtirish ──
-# ── Audio URL ni JSON ichida avtomatik almashtirish ──
+
+        # ── Audio URL ni JSON ichida avtomatik almashtirish ──
         if audio_url:
             if "audio_url" in parsed:
                 parsed["audio_url"] = audio_url
             for part in parsed.get("parts", []):
                 if "audio_url" in part:
                     part["audio_url"] = audio_url
-                # explanations ichidagi audio_url larni ham almashtirish
                 for expl in part.get("explanations", {}).values():
                     if isinstance(expl, dict) and "audio_url" in expl:
                         expl["audio_url"] = audio_url
 
-        # O'zgartirilgan JSON ni R2 ga yuklash
+        # ── Map Image URL ni JSON ichida avtomatik almashtirish ──
+        if map_image_url:
+            for part in parsed.get("parts", []):
+                if "map_image_url" in part:
+                    part["map_image_url"] = map_image_url
+
         updated_content = json.dumps(parsed, ensure_ascii=False).encode("utf-8")
         unique_name = f"{uuid.uuid4()}.json"
         upload_to_r2(updated_content, f"jsons/{unique_name}", "application/json")

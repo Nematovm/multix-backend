@@ -36,6 +36,7 @@ app.add_middleware(
         "http://127.0.0.1:8080",
         "https://multx.uz",
         "https://www.multx.uz",
+        "https://app.multx.uz",      # ← QO'SHILDI
         "https://api.multx.uz",
     ],
     allow_credentials=True,

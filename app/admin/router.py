@@ -469,11 +469,14 @@ async def create_listening_test(
 ):
     from ..models import ListeningTest
 
+    # R2 sozlamalari mavjudligini tekshirish
+    r2_available = all([R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_ACCOUNT_ID, R2_PUBLIC_URL])
+
     cat = db.query(Category).filter(Category.id == category_id).first()
     if not cat:
         raise HTTPException(status_code=400, detail="Kategoriya topilmadi")
 
-    # ── Audio → R2 ──
+    # ── Audio → R2 (yoki local) ──
     audio_url = None
     if audio_file and audio_file.filename:
         allowed_audio = ['.mp3', '.wav', '.ogg', '.m4a', '.aac']
@@ -481,12 +484,23 @@ async def create_listening_test(
         if ext not in allowed_audio:
             raise HTTPException(status_code=400, detail=f"Faqat audio fayl: {', '.join(allowed_audio)}")
         content = await audio_file.read()
-        unique_name = f"{uuid.uuid4()}{ext}"
-        ct_map = {'.mp3':'audio/mpeg','.wav':'audio/wav','.ogg':'audio/ogg','.m4a':'audio/mp4','.aac':'audio/aac'}
-        upload_to_r2(content, f"audios/{unique_name}", ct_map.get(ext, 'audio/mpeg'))
-        audio_url = f"{R2_PUBLIC_URL}/audios/{unique_name}"
+        if r2_available:
+            try:
+                unique_name = f"{uuid.uuid4()}{ext}"
+                ct_map = {'.mp3':'audio/mpeg','.wav':'audio/wav','.ogg':'audio/ogg','.m4a':'audio/mp4','.aac':'audio/aac'}
+                upload_to_r2(content, f"audios/{unique_name}", ct_map.get(ext, 'audio/mpeg'))
+                audio_url = f"{R2_PUBLIC_URL}/audios/{unique_name}"
+            except Exception as e:
+                raise HTTPException(status_code=500, detail=f"Audio yuklashda xato: {str(e)}")
+        else:
+            # Local: faylni static papkaga saqlash
+            os.makedirs("static/audios", exist_ok=True)
+            unique_name = f"{uuid.uuid4()}{ext}"
+            with open(f"static/audios/{unique_name}", "wb") as f:
+                f.write(content)
+            audio_url = f"http://localhost:8000/static/audios/{unique_name}"
 
-    # ── Map Image → R2 ──
+    # ── Map Image → R2 (yoki local) ──
     map_image_url = None
     if map_image and map_image.filename:
         allowed_img = ['.png', '.jpg', '.jpeg', '.webp', '.gif']
@@ -494,12 +508,22 @@ async def create_listening_test(
         if ext not in allowed_img:
             raise HTTPException(status_code=400, detail=f"Faqat rasm fayl: {', '.join(allowed_img)}")
         content = await map_image.read()
-        unique_name = f"{uuid.uuid4()}{ext}"
-        ct_img = {'.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.webp':'image/webp','.gif':'image/gif'}
-        upload_to_r2(content, f"images/{unique_name}", ct_img.get(ext, 'image/png'))
-        map_image_url = f"{R2_PUBLIC_URL}/images/{unique_name}"
+        if r2_available:
+            try:
+                unique_name = f"{uuid.uuid4()}{ext}"
+                ct_img = {'.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.webp':'image/webp','.gif':'image/gif'}
+                upload_to_r2(content, f"images/{unique_name}", ct_img.get(ext, 'image/png'))
+                map_image_url = f"{R2_PUBLIC_URL}/images/{unique_name}"
+            except Exception as e:
+                raise HTTPException(status_code=500, detail=f"Rasm yuklashda xato: {str(e)}")
+        else:
+            os.makedirs("static/images", exist_ok=True)
+            unique_name = f"{uuid.uuid4()}{ext}"
+            with open(f"static/images/{unique_name}", "wb") as f:
+                f.write(content)
+            map_image_url = f"http://localhost:8000/static/images/{unique_name}"
 
-    # ── JSON → R2 ──
+    # ── JSON → R2 (yoki local) ──
     json_filename = None
     if json_file and json_file.filename:
         if not json_file.filename.endswith(".json"):
@@ -531,7 +555,17 @@ async def create_listening_test(
 
         updated_content = json.dumps(parsed, ensure_ascii=False).encode("utf-8")
         unique_name = f"{uuid.uuid4()}.json"
-        upload_to_r2(updated_content, f"jsons/{unique_name}", "application/json")
+
+        if r2_available:
+            try:
+                upload_to_r2(updated_content, f"jsons/{unique_name}", "application/json")
+            except Exception as e:
+                raise HTTPException(status_code=500, detail=f"JSON yuklashda xato: {str(e)}")
+        else:
+            os.makedirs("static/jsons", exist_ok=True)
+            with open(f"static/jsons/{unique_name}", "wb") as f:
+                f.write(updated_content)
+
         json_filename = unique_name
 
     test = ListeningTest(
@@ -572,10 +606,23 @@ def delete_listening_test(test_id: int, db: Session = Depends(get_db), admin=Dep
 @router.get("/listening-tests/{test_id}/json-data")
 def get_listening_test_json(test_id: int, db: Session = Depends(get_db)):
     from ..models import ListeningTest
-    test = db.query(ListeningTest).filter(ListeningTest.id == test_id, ListeningTest.is_active == True).first()
+    from fastapi.responses import FileResponse
+    test = db.query(ListeningTest).filter(
+        ListeningTest.id == test_id,
+        ListeningTest.is_active == True
+    ).first()
     if not test or not test.json_filename:
         raise HTTPException(status_code=404, detail="JSON topilmadi")
-    return RedirectResponse(url=f"{R2_PUBLIC_URL}/jsons/{test.json_filename}")
+
+    r2_available = all([R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_ACCOUNT_ID, R2_PUBLIC_URL])
+
+    if r2_available:
+        return RedirectResponse(url=f"{R2_PUBLIC_URL}/jsons/{test.json_filename}")
+    else:
+        local_path = f"static/jsons/{test.json_filename}"
+        if not os.path.exists(local_path):
+            raise HTTPException(status_code=404, detail="JSON fayl topilmadi")
+        return FileResponse(local_path, media_type="application/json")
 
 
 

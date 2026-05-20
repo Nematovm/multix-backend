@@ -442,8 +442,9 @@ def get_listening_tests(db: Session = Depends(get_db), admin=Depends(get_admin_u
             "level":        t.level,
             "type":         t.test_type,
             "format":       t.format,
-            "parts":        t.parts or "1,2,3,4",
+            "parts":        t.parts or "1,2,3,4,5,6",
             "duration":     t.duration,
+            "questions_count": t.questions_count or 40,  # ← YANGI
             "audio_url":    t.audio_url,
             "has_audio":    bool(t.audio_url),
             "json_filename": t.json_filename,
@@ -454,16 +455,17 @@ def get_listening_tests(db: Session = Depends(get_db), admin=Depends(get_admin_u
 
 @router.post("/listening-tests")
 async def create_listening_test(
-    name:         str        = Form(...),
-    category_id:  int        = Form(...),
-    level:        str        = Form("medium"),
-    type:         str        = Form("free"),
-    format:       str        = Form("full"),
-    parts:        str        = Form("1,2,3,4"),
-    duration:     int        = Form(40),
-    audio_file:   UploadFile = File(None),
-    map_image:    UploadFile = File(None),
-    json_file:    UploadFile = File(None),
+    name:            str        = Form(...),
+    category_id:     int        = Form(...),
+    level:           str        = Form("medium"),
+    type:            str        = Form("free"),
+    format:          str        = Form("full"),
+    parts:           str        = Form("1,2,3,4"),
+    duration:        int        = Form(40),
+    questions_count: int        = Form(40),   # ← YANGI
+    audio_file:      UploadFile = File(None),
+    map_image:       UploadFile = File(None),
+    json_file:       UploadFile = File(None),
     db: Session = Depends(get_db),
     admin=Depends(get_admin_user)
 ):
@@ -576,6 +578,7 @@ async def create_listening_test(
         format=format,
         parts=parts,
         duration=duration,
+        questions_count=questions_count,  # ← YANGI
         audio_url=audio_url,
         json_filename=json_filename,
     )

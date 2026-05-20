@@ -142,6 +142,9 @@ class TestAttempt(Base):
 
 
 
+
+
+
 class ListeningTest(Base):
     __tablename__ = "listening_tests"
 
@@ -149,12 +152,13 @@ class ListeningTest(Base):
     name         = Column(String(200), nullable=False)
     description  = Column(String(400), nullable=True)
     category_id  = Column(Integer, ForeignKey("categories.id"), nullable=False)
-    level        = Column(String(20), nullable=True)          # easy / medium / hard
-    test_type    = Column(String(20), nullable=True)          # free / premium
-    format       = Column(String(20), nullable=True)          # full / part
+    level        = Column(String(20), nullable=True)
+    test_type    = Column(String(20), nullable=True)
+    format       = Column(String(20), nullable=True)
     parts        = Column(String(50), nullable=True, default="1,2,3,4")
     duration     = Column(Integer, nullable=True, default=40)
+    questions_count = Column(Integer, nullable=True, default=40)  # ← YANGI
     is_active    = Column(Boolean, default=True)
-    audio_url    = Column(String(500), nullable=True)         # R2 audio URL
-    json_filename = Column(String(300), nullable=True)        # R2 json fayl nomi
+    audio_url    = Column(String(500), nullable=True)
+    json_filename = Column(String(300), nullable=True)
     created_at   = Column(DateTime(timezone=True), server_default=func.now())

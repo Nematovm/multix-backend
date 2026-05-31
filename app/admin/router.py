@@ -119,9 +119,8 @@ def create_category(
     return cat
 
 
-# O'CHIRISH — DELETE o'rniga POST ishlatamiz
-@router.post("/categories/{cat_id}/delete")
-def delete_category(cat_id: int, db: Session = Depends(get_db), admin=Depends(get_admin_user)):
+@router.delete("/categories/{cat_id}")
+def delete_category_alt(cat_id: int, db: Session = Depends(get_db), admin=Depends(get_admin_user)):
     cat = db.query(Category).filter(Category.id == cat_id).first()
     if not cat:
         raise HTTPException(status_code=404, detail="Topilmadi")

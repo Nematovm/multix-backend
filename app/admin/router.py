@@ -10,6 +10,8 @@ from ..models import Question
 from ..schemas import QuestionCreate
 from typing import Optional
 from datetime import datetime, timedelta, timezone
+from fastapi import APIRouter
+from fastapi.middleware.cors import CORSMiddleware
 
 
 router = APIRouter(prefix="/admin", tags=["Admin"])
@@ -117,7 +119,9 @@ def create_category(
     return cat
 
 
-@router.delete("/categories/{cat_id}")
+@router.options("/categories/{cat_id}")
+def options_category(cat_id: int):
+    return {}
 def delete_category(cat_id: int, db: Session = Depends(get_db), admin=Depends(get_admin_user)):
     cat = db.query(Category).filter(Category.id == cat_id).first()
     if not cat:

@@ -120,7 +120,7 @@ def create_category(
 
 
 @router.delete("/categories/{cat_id}")
-def delete_category_alt(cat_id: int, db: Session = Depends(get_db), admin=Depends(get_admin_user)):
+def delete_category_delete(cat_id: int, db: Session = Depends(get_db), admin=Depends(get_admin_user)):
     cat = db.query(Category).filter(Category.id == cat_id).first()
     if not cat:
         raise HTTPException(status_code=404, detail="Topilmadi")

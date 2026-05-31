@@ -119,9 +119,8 @@ def create_category(
     return cat
 
 
-@router.options("/categories/{cat_id}")
-def options_category(cat_id: int):
-    return {}
+# O'CHIRISH — DELETE o'rniga POST ishlatamiz
+@router.post("/categories/{cat_id}/delete")
 def delete_category(cat_id: int, db: Session = Depends(get_db), admin=Depends(get_admin_user)):
     cat = db.query(Category).filter(Category.id == cat_id).first()
     if not cat:

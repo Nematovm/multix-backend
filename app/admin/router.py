@@ -164,6 +164,7 @@ def get_tests(section: str = None, db: Session = Depends(get_db), admin=Depends(
             "has_pdf": bool(t.pdf_filename),
             "json_filename": t.json_filename,
             "has_json": bool(t.json_filename),
+            "recovery_enabled": t.recovery_enabled or False,   # ← YANGI
         })
     return result
 
@@ -181,6 +182,7 @@ async def create_test(
     questions_count: int = Form(35),
     telegram_channel: str = Form(""),
     telegram_link: str = Form(""),
+    recovery_enabled: str = Form("false"),   # ← YANGI
     pdf_file: UploadFile = File(None),
     json_file: UploadFile = File(None),
     db: Session = Depends(get_db),
@@ -228,6 +230,7 @@ async def create_test(
         pdf_filename=pdf_filename,
         json_filename=json_filename,
         parts=parts,
+        recovery_enabled=(recovery_enabled.lower() == "true"),  # ← YANGI
     )
     db.add(test)
     db.commit()
@@ -451,26 +454,29 @@ def get_listening_tests(db: Session = Depends(get_db), admin=Depends(get_admin_u
             "has_audio":    bool(t.audio_url),
             "json_filename": t.json_filename,
             "has_json":     bool(t.json_filename),
+            "recovery_enabled": t.recovery_enabled or False,   # ← YANGI
         })
     return result
 
 
 @router.post("/listening-tests")
 async def create_listening_test(
-    name:            str        = Form(...),
-    category_id:     int        = Form(...),
-    level:           str        = Form("medium"),
-    type:            str        = Form("free"),
-    format:          str        = Form("full"),
-    parts:           str        = Form("1,2,3,4"),
-    duration:        int        = Form(40),
-    questions_count: int        = Form(40),   # ← YANGI
-    audio_file:      UploadFile = File(None),
-    map_image:       UploadFile = File(None),
-    json_file:       UploadFile = File(None),
+    name: str = Form(...),
+    category_id: int = Form(...),
+    level: str = Form("medium"),
+    type: str = Form("free"),
+    format: str = Form("full"),
+    parts: str = Form("1,2,3,4"),
+    duration: int = Form(40),
+    questions_count: int = Form(40),
+    recovery_enabled: str = Form("false"),   # ← YANGI
+    audio_file: UploadFile = File(None),
+    map_image: UploadFile = File(None),
+    json_file: UploadFile = File(None),
     db: Session = Depends(get_db),
     admin=Depends(get_admin_user)
 ):
+
     from ..models import ListeningTest
 
     # R2 sozlamalari mavjudligini tekshirish
@@ -580,9 +586,10 @@ async def create_listening_test(
         format=format,
         parts=parts,
         duration=duration,
-        questions_count=questions_count,  # ← YANGI
+        questions_count=questions_count,
         audio_url=audio_url,
         json_filename=json_filename,
+        recovery_enabled=(recovery_enabled.lower() == "true"),  # ← YANGI
     )
     db.add(test)
     db.commit()

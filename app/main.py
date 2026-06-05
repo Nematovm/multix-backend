@@ -6,24 +6,16 @@ from .database import engine, Base, get_db
 from .auth.router import router as auth_router
 from .admin.router import router as admin_router
 from .feedback.router import router as feedback_router
+from .recovery.router import router as recovery_router   # ← YANGI
 from .config import settings
 from .utils.jwt import decode_token
 from pydantic import BaseModel
 from typing import Optional, Dict, Any
 import os
-from .models import ListeningTest
 
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="ClearPath API", version="1.0.0")
-
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["*"],
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
 
 app.add_middleware(
     CORSMiddleware,
@@ -39,6 +31,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 app.include_router(auth_router)
 app.include_router(admin_router)
 app.include_router(feedback_router)
+app.include_router(recovery_router)   # ← YANGI
 
 
 # ─────────────────────────────────────────────
@@ -55,9 +48,6 @@ class AttemptSubmitRequest(BaseModel):
     user_answers: Optional[Dict[str, Any]] = None
 
 
-# ─────────────────────────────────────────────
-# POST /attempts  — natijani saqlash
-# ─────────────────────────────────────────────
 @app.post("/attempts")
 def submit_attempt(
     body: AttemptSubmitRequest,
@@ -93,9 +83,6 @@ def submit_attempt(
     return {"id": attempt.id, "message": "Attempt saqlandi"}
 
 
-# ─────────────────────────────────────────────
-# GET /attempts/me  — foydalanuvchining attemptlari
-# ─────────────────────────────────────────────
 @app.get("/attempts/me")
 def get_my_attempts(
     authorization: str = Header(None),
@@ -135,9 +122,6 @@ def get_my_attempts(
     ]
 
 
-# ─────────────────────────────────────────────
-# GET /attempts/{attempt_id}  — bitta attempt (review uchun)
-# ─────────────────────────────────────────────
 @app.get("/attempts/{attempt_id}")
 def get_attempt(
     attempt_id: int,
@@ -177,9 +161,6 @@ def get_attempt(
     }
 
 
-# ─────────────────────────────────────────────
-# Mavjud endpointlar (o'zgarmagan)
-# ─────────────────────────────────────────────
 @app.get("/tests")
 def get_public_tests(section: str = None, db: Session = Depends(get_db)):
     from .models import Test, Category
@@ -203,6 +184,7 @@ def get_public_tests(section: str = None, db: Session = Depends(get_db)):
             "telegram_channel": t.telegram_channel,
             "telegram_link": t.telegram_link,
             "pdf_url": pdf_url,
+            "recovery_enabled": t.recovery_enabled or False,  # ← YANGI
         })
     return result
 
@@ -225,6 +207,7 @@ def get_public_listening_tests(db: Session = Depends(get_db)):
             "audio_url":      t.audio_url,
             "has_audio":      bool(t.audio_url),
             "questions_count": 40,
+            "recovery_enabled": t.recovery_enabled or False,  # ← YANGI
         })
     return result
 
